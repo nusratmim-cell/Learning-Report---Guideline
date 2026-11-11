@@ -42,6 +42,8 @@ ul,ol{margin:6px 0 14px;padding-left:22px}li{margin:5px 0}
 .say p{margin:0;color:#7d1552;font-family:var(--bn)}
 .note{background:var(--amber-bg);border-left:3px solid var(--orange);border-radius:0 12px 12px 0;padding:13px 16px;margin:14px 0;color:var(--amber-fg);font-size:.98rem}
 .note b{font-weight:700}
+.callout{background:var(--navy-soft);border:1px solid #D7DFF6;border-left:4px solid var(--mag);border-radius:0 12px 12px 0;padding:13px 16px;margin:14px 0 4px;color:var(--navy2);font-size:1.04rem;font-weight:600}
+.callout b{color:var(--mag);font-weight:800}
 .tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:10px 0 6px}
 .tab{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 12px;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
 .tab::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
@@ -85,7 +87,7 @@ footer{margin-top:48px;color:var(--ink3);font-size:.86rem;text-align:center;font
     <li>Exam ও Learning Activity-র হিসাব</li>
     <li>অন্য শিক্ষার্থীদের তুলনায় Rank</li>
   </ul>
-  <p class="bn">রিপোর্ট দেখতে Shikho App বা আলাদা Login লাগবে না। Report Link-এ চাপ দিলেই দেখা যাবে।</p>
+  <div class="callout bn"><b>Shikho App বা আলাদা Login লাগবে না।</b> Report Link-এ চাপ দিলেই দেখা যাবে।</div>
 </section>
 
 <section>
@@ -105,6 +107,7 @@ footer{margin-top:48px;color:var(--ink3);font-size:.86rem;text-align:center;font
     <div class="tab t3"><div class="tt">লিডারবোর্ড</div><div class="td">Rank</div></div>
   </div>
   <h3 class="lbl bn">Score-এর রঙ কী বোঝায়?</h3>
+  <p class="bn" style="margin:2px 0 10px;color:var(--ink2)">এই রঙ রেজাল্ট Tab-এ Overall Score, প্রতিটি Subject ও Chapter-এর ফলাফলে দেখা যায়।</p>
   <div class="colors">
     <div class="crow"><span class="sw" style="background:#2C7A4B"></span><b>সবুজ:</b>&nbsp;ভালো করছে।</div>
     <div class="crow"><span class="sw" style="background:#E0A800"></span><b>হলুদ:</b>&nbsp;মোটামুটি করছে, আরও ভালো করার সুযোগ আছে।</div>
