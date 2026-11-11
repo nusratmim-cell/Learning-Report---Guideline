@@ -1,0 +1,501 @@
+<title>Learning Report Care Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap">
+<style>
+/* Scenario-led CX playbook: refined masthead, quick-reference strip, call scenarios as the spine, annotated screen reference, objection handling, guardrails, and an internal to-confirm list. Agent notes vs guardian scripts stay visually distinct. */
+:root{
+  color-scheme: light;
+  --ground:#F7F6F2; --paper:#FFFFFF; --sunken:#F0EEE8; --raise:#FCFBF9;
+  --ink:#191C24; --ink-2:#474D5C; --ink-3:#7A8090; --line:#E4E1D9; --line-2:#EFEDE7;
+  --navy:#354894; --navy-700:#2A3a7a; --navy-soft:#EDEFFA; --navy-ink:#2b3356;
+  --mag:#C2257F; --mag-soft:#FBEDF4; --mag-ink:#7d1551;
+  --good-fg:#2C7A4B; --good-bg:#E4F2EA; --warn-fg:#976305; --warn-bg:#FBF0D4; --bad-fg:#B8304B; --bad-bg:#FBE4E9;
+  --sans:"Inter","Hind Siliguri",system-ui,sans-serif;
+  --head:"Space Grotesk","Hind Siliguri","Inter",system-ui,sans-serif;
+  --bn:"Hind Siliguri","Inter",system-ui,sans-serif;
+  --maxw:1000px; --r:16px;
+}
+*{box-sizing:border-box}
+html{font-size:113%}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:1.03rem;line-height:1.64;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));padding-block:0}
+h1,h2,h3,h4{font-family:var(--head);margin:0;line-height:1.22;text-wrap:balance}
+p{margin:0}
+.bn{font-family:var(--bn)}
+.eyebrow{font-family:var(--head);text-transform:uppercase;letter-spacing:.1em;font-size:.7rem;font-weight:600;color:var(--mag)}
+.ui{font-family:var(--bn);background:var(--sunken);border:1px solid var(--line);border-radius:6px;padding:0 6px;font-size:.93em;white-space:nowrap}
+.tap{font-family:var(--head);font-weight:700;font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--mag);border-radius:4px;padding:2px 6px;vertical-align:middle}
+
+/* Copy bar */
+.copybar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+.copybtn{font-family:var(--head);font-weight:700;font-size:.9rem;color:#fff;background:var(--navy);border:0;border-radius:10px;padding:11px 18px;cursor:pointer;line-height:1}
+.copybtn:hover{background:var(--navy-700)}.copybtn:disabled{opacity:.7}.copybtn.done{background:var(--good-fg)}
+
+/* Masthead */
+.mast{background:var(--paper);border:1px solid var(--line);border-radius:22px;margin-top:14px;padding:28px 28px 26px;position:relative;overflow:hidden}
+.mast::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:linear-gradient(90deg,var(--navy),var(--mag))}
+.mast .brand{display:flex;align-items:center;gap:9px;font-family:var(--head);font-weight:700;font-size:1.02rem;letter-spacing:.01em;color:var(--navy)}
+.mast .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--mag)}
+.mast .kick{color:var(--ink-3);text-transform:uppercase;letter-spacing:.13em;font-size:.7rem;font-weight:600;margin-top:16px}
+.mast h1{font-size:clamp(1.7rem,4.6vw,2.4rem);margin-top:8px;color:var(--navy)}
+.mast .sub{color:var(--ink-2);margin-top:11px;max-width:62ch;font-size:1.05rem}
+.quicknav{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.quicknav a{font-family:var(--head);font-weight:600;font-size:.8rem;color:var(--navy);background:var(--navy-soft);border:1px solid var(--line);border-radius:999px;padding:7px 14px;text-decoration:none}
+.quicknav a:hover{background:#E4E8F8}
+
+/* Video */
+.videowrap{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.videowrap video{width:100%;max-width:300px;border-radius:16px;border:1px solid var(--line);background:#000;box-shadow:0 12px 30px rgba(25,28,36,.14)}
+.videowrap .vlabel{font-family:var(--head);font-size:.84rem;font-weight:600;color:var(--navy);margin-top:3px}
+.videowrap .vsub{color:var(--ink-3);font-size:.82rem}
+
+/* Sections */
+section{margin-top:40px;scroll-margin-top:14px}
+.shead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:16px}
+.shead .num{font-family:var(--head);font-weight:700;color:var(--mag);font-size:.95rem}
+.shead h2{font-size:1.4rem;color:var(--navy)}
+.shead .meta{margin-left:auto;color:var(--ink-3);font-size:.82rem;font-family:var(--bn)}
+.lead{color:var(--ink-2);max-width:66ch;font-size:1.02rem;margin-bottom:4px}
+
+/* Quick reference strip */
+.qref{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.panel h3{font-size:1rem;color:var(--ink);margin-bottom:10px}
+.tabrow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+.tabchip{background:var(--navy-soft);border-radius:11px;padding:11px 8px;text-align:center}
+.tabchip .t{font-family:var(--bn);font-weight:700;color:var(--navy);font-size:.98rem}
+.tabchip .d{font-family:var(--bn);color:var(--ink-3);font-size:.76rem;margin-top:2px}
+.qref .note{font-family:var(--bn);color:var(--ink-2);font-size:.92rem;margin-top:12px;background:var(--navy-soft);border-radius:10px;padding:10px 12px}
+.keyrow{display:flex;flex-direction:column;gap:9px}
+.key{display:flex;align-items:center;gap:10px;font-family:var(--bn);font-size:.95rem;color:var(--ink-2)}
+.swatch{width:16px;height:16px;border-radius:5px;flex:0 0 auto}
+.helpbox{margin-top:12px;background:var(--mag-soft);border-radius:10px;padding:11px 13px;display:flex;align-items:center;gap:10px}
+.helpbox .n{font-family:var(--head);font-weight:700;font-size:1.25rem;color:var(--mag)}
+.helpbox span{font-family:var(--bn);color:var(--mag-ink);font-size:.9rem}
+
+/* Scenario cards */
+.scenario{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:0;margin-top:16px;overflow:hidden}
+.scenario .top{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;background:var(--raise);border-bottom:1px solid var(--line-2)}
+.scenario .sn{flex:0 0 auto;width:38px;height:38px;border-radius:11px;background:var(--navy);color:#fff;font-family:var(--head);font-weight:700;font-size:1.15rem;display:grid;place-items:center}
+.scenario .st h3{font-size:1.12rem;color:var(--ink)}
+.scenario .sit{font-family:var(--bn);color:var(--ink-3);font-size:.88rem;margin-top:3px}
+.scenario .goal{font-family:var(--bn);display:inline-block;margin-top:8px;background:var(--navy-soft);color:var(--navy);border-radius:999px;padding:4px 12px;font-size:.84rem;font-weight:600}
+.scenario .bd{padding:16px 20px 20px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.steps li{position:relative;padding-left:30px;font-family:var(--bn);color:var(--ink-2);font-size:.98rem}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:50%;background:var(--navy-soft);color:var(--navy);font-family:var(--head);font-weight:700;font-size:.72rem;display:grid;place-items:center}
+.steps{counter-reset:st}
+.script{margin-top:14px;background:var(--mag-soft);border-radius:12px;padding:14px 16px}
+.script .lbl{font-family:var(--head);font-size:.66rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mag)}
+.script .say{font-family:var(--bn);color:var(--mag-ink);font-size:1.04rem;line-height:1.7;margin-top:6px}
+.warn{margin-top:12px;font-family:var(--bn);background:var(--warn-bg);color:var(--warn-fg);border-radius:10px;padding:10px 13px;font-size:.92rem}
+.warn b{font-weight:700}
+.scenario .aim{font-family:var(--bn);color:var(--ink);font-size:1.02rem}
+.scenario .aim b{color:var(--navy)}
+.pts{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:9px}
+.pts li{position:relative;padding-left:19px;font-family:var(--bn);color:var(--ink-2);font-size:1.02rem}
+.pts li::before{content:"";position:absolute;left:3px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--mag)}
+.sugg{margin-top:15px;background:var(--mag-soft);border-radius:12px;padding:13px 16px}
+.sugg .lbl{font-family:var(--head);font-size:.66rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mag)}
+.sugg .q{font-family:var(--bn);color:var(--mag-ink);font-size:1.06rem;line-height:1.7;margin-top:5px}
+.sugg .hint{font-family:var(--bn);color:var(--ink-3);font-size:.84rem;margin-top:7px}
+
+/* Screen reference */
+.navnote{background:var(--navy);color:#fff;border-radius:14px;padding:16px 18px;margin-bottom:6px}
+.navnote .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+.navnote .tab{font-family:var(--bn);background:rgba(255,255,255,.15);border-radius:8px;padding:5px 12px;font-size:.92rem}
+.screen{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:16px}
+.shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--sunken);box-shadow:0 10px 26px rgba(25,28,36,.10)}
+.shot img{display:block;width:100%;height:auto}
+.screen .bd{min-width:0}
+.screen .tag{font-family:var(--head);font-weight:600;color:var(--navy);font-size:.76rem;text-transform:uppercase;letter-spacing:.07em}
+.screen h3{font-size:1.2rem;color:var(--ink);margin-top:3px;margin-bottom:4px}
+.screen .where{font-family:var(--bn);color:var(--ink-3);font-size:.88rem;margin-bottom:12px}
+.legend{display:grid;gap:12px}
+.li{display:grid;grid-template-columns:26px 1fr;gap:11px}
+.li .b{width:26px;height:26px;border-radius:50%;background:var(--mag);color:#fff;font-family:var(--head);font-weight:700;font-size:.82rem;display:grid;place-items:center}
+.li .t{font-family:var(--bn);font-weight:700;color:var(--ink);font-size:.98rem}
+.li .m{font-family:var(--bn);color:var(--ink-2);font-size:.92rem;margin-top:2px}
+.li .s{font-family:var(--bn);color:var(--navy);font-size:.92rem;margin-top:4px;border-left:3px solid var(--mag);padding-left:9px}
+.li .s b{color:var(--mag)}
+
+/* FAQ */
+.faq{display:grid;gap:12px}
+.qa{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.qa .q{font-family:var(--bn);font-weight:700;color:var(--ink);font-size:1.01rem}
+.qa .q .mk{display:block;font-family:var(--head);color:var(--mag);font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.qa .ans{font-family:var(--bn);color:var(--mag-ink);background:var(--mag-soft);border-radius:9px;padding:10px 13px;margin-top:9px;font-size:.98rem;line-height:1.7}
+.qa .act{font-family:var(--bn);color:var(--navy-ink);background:var(--navy-soft);border-radius:9px;padding:9px 13px;margin-top:8px;font-size:.92rem}
+.qa .act b{font-family:var(--head);color:var(--navy);font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px}
+
+/* Guardrails */
+.guard{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gcard{border-radius:14px;padding:16px 18px}
+.gcard.do{background:var(--good-bg)} .gcard.dont{background:var(--bad-bg)}
+.gcard h3{font-size:1rem;margin-bottom:9px}.gcard.do h3{color:var(--good-fg)}.gcard.dont h3{color:var(--bad-fg)}
+.gcard ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.gcard li{font-family:var(--bn);font-size:.95rem}.gcard.do li{color:#1f5a3b}.gcard.dont li{color:#8e2639}
+
+/* Confirm */
+.confirm{background:#FFF8EA;border:1px solid #EAD6A0;border-radius:18px;padding:20px 22px}
+.confirm h3{color:#8a5d04;font-size:1.1rem}
+.confirm .note{font-family:var(--bn);color:#8a5d04;font-size:.9rem;margin-top:6px}
+.confirm ul{margin:12px 0 0;padding-left:20px;display:grid;gap:8px}
+.confirm li{font-family:var(--bn);color:#6b4a06;font-size:.95rem}
+
+.deliver{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.dcard{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:15px 16px}
+.dcard .dh{font-family:var(--head);font-weight:600;color:var(--navy);font-size:.9rem;margin-bottom:5px}
+.dcard p{font-family:var(--bn);color:var(--ink-2);font-size:.94rem}
+@media(max-width:760px){.deliver{grid-template-columns:1fr}}
+.devnote{font-family:var(--bn);background:var(--warn-bg);color:var(--warn-fg);border-radius:10px;padding:11px 14px;font-size:.98rem;margin-top:12px}
+.devnote b{font-weight:700}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;font-family:var(--bn);font-size:.95rem;padding:11px 18px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.28);z-index:50;max-width:90vw;text-align:center}
+footer{margin:42px 0 20px;color:var(--ink-3);font-size:.84rem;text-align:center;font-family:var(--bn)}
+
+@media (max-width:760px){
+  .qref,.guard{grid-template-columns:1fr}
+  .screen{grid-template-columns:1fr;gap:16px}
+  .shot{max-width:320px;margin:0 auto}
+  .tabrow{grid-template-columns:1fr 1fr 1fr}
+}
+</style>
+
+<div class="wrap">
+
+  <div id="guide">
+
+  <header class="mast">
+    <div class="brand"><span class="dot"></span> shikho</div>
+    <h1>Shikho Learning Report</h1>
+    <p class="sub">A reference for how the Shikho Learning Report works — what parents see, and what each screen means. Currently in development, ahead of launch.</p>
+    <nav class="quicknav">
+      <a href="#about">Learning Report কী</a>
+      <a href="#ref">Quick Reference</a>
+      <a href="#scn">Call Scenarios</a>
+      <a href="#screens">Screens</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <div class="videowrap">
+    <video controls preload="metadata" playsinline src="assets/walkthrough.mp4"></video>
+    <div class="vlabel">৭৮ সেকেন্ডে পুরো Report এক নজরে</div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="shead"><span class="num">01</span><h2>Learning Report কী?</h2></div>
+    <p class="lead bn">Learning Report হলো প্রতি মাসে অভিভাবকের কাছে পাঠানো একটা <b>link</b>, যেখানে গত মাসে তাদের সন্তান পড়াশোনায় কেমন করেছে — সার্বিক স্কোর, প্রতিটি বিষয়, দুর্বল chapter, কতটা নিয়মিত ছিল আর leaderboard-এ অবস্থান — সব সহজভাবে দেখা যাবে। <b>App বা login লাগবে না</b>, শুধু link-এ tap।</p>
+    <div class="deliver">
+      <div class="dcard"><div class="dh">কাদের জন্য</div><p>Report অভিভাবকদের জন্য — paid, trial ও free, সব student-এর অভিভাবকই দেখতে পারবেন।</p></div>
+      <div class="dcard"><div class="dh">Paid guardian — Automatic SMS</div><p>Paid student-এর অভিভাবক প্রতি মাসের শুরুতে <b>SMS</b>-এ link পাবেন (গত মাসের report)। আলাদা করে চাইতে হবে না।</p></div>
+      <div class="dcard"><div class="dh">Trial / Free — আপনি পাঠাবেন</div><p>এদের automatic যাবে না। আপনি CRM lead থেকে <b>WhatsApp</b>-এ link পাঠাবেন, যেভাবে অন্য link পাঠান।</p></div>
+      <div class="dcard"><div class="dh">Link personal রাখুন</div><p>link-টা যার কাছে থাকবে সে-ই খুলতে পারবে। তাই শুধু ঐ সন্তানের guardian-কেই পাঠাবেন।</p></div>
+    </div>
+  </section>
+
+  <!-- QUICK REFERENCE -->
+  <section id="ref">
+    <div class="shead"><span class="num">02</span><h2>Quick Reference</h2><span class="meta">৩০ সেকেন্ডে</span></div>
+    <div class="qref">
+      <div class="panel">
+        <h3 class="bn">Report-এ কী আছে — ৩টি Tab</h3>
+        <div class="tabrow">
+          <div class="tabchip"><div class="t">রেজাল্ট</div><div class="d">স্কোর ও বিষয়</div></div>
+          <div class="tabchip"><div class="t">পড়াশোনা</div><div class="d">নিয়মিততা</div></div>
+          <div class="tabchip"><div class="t">লিডারবোর্ড</div><div class="d">অবস্থান</div></div>
+        </div>
+        <p class="note bn"><b>বিষয়</b> ও <b>চ্যাপ্টার</b> আলাদা tab নয় — রেজাল্ট থেকে subject-এ, subject থেকে chapter-এ <span class="tap">tap</span> করে ঢুকতে হয়।</p>
+      </div>
+      <div class="panel">
+        <h3 class="bn">রঙের মানে</h3>
+        <div class="keyrow">
+          <div class="key"><span class="swatch" style="background:#2C7A4B"></span> সবুজ — ভালো করছে</div>
+          <div class="key"><span class="swatch" style="background:#E0A800"></span> হলুদ — মোটামুটি</div>
+          <div class="key"><span class="swatch" style="background:#D5415E"></span> লাল — একটু বেশি practice দরকার</div>
+        </div>
+        <div class="helpbox"><span class="n">16780</span><span>Guardian helpline — প্রশ্ন থাকলে এই নম্বর দিন।</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL SCENARIOS -->
+  <section id="scn">
+    <div class="shead"><span class="num">03</span><h2>Call Scenarios</h2><span class="meta">এই guide-এর মূল অংশ</span></div>
+    <p class="lead bn">বেশিরভাগ call এই ৫টার কোনো একটা। যেটা মিলে যায়, সেখান থেকে ধাপগুলো পড়ুন।</p>
+
+    <div class="scenario">
+      <div class="top"><div class="sn">1</div><div class="st"><h3 class="bn">নতুন Paid Guardian-কে Report বোঝানো</h3><div class="sit">Guardian প্রথমবার report দেখছেন।</div><span class="goal bn">লক্ষ্য: নিজে link খুলে score ও subjects দেখতে পারা</span></div></div>
+      <div class="bd">
+        <ol class="steps">
+          <li>সালাম দিয়ে পরিচয় দিন — "আপনার সন্তানের গত মাসের report নিয়ে কথা বলব"।</li>
+          <li>WhatsApp/SMS-এ পাঠানো link-এ একবার <span class="tap">tap</span> করতে বলুন।</li>
+          <li>প্রথমে <span class="ui">রেজাল্ট</span> screen-এর উপরে বড় <b>overall score</b> দেখান।</li>
+          <li>একটু নিচে নামিয়ে প্রতিটি <b>subject</b>-এর ফল দেখান; লাল subject-এ tap করতে বলুন।</li>
+          <li>helpline <b>16780</b> দিয়ে ধন্যবাদ জানিয়ে শেষ করুন।</li>
+        </ol>
+        <div class="script"><div class="lbl">বলতে পারেন এভাবে</div><div class="say">"ওই বড় number-টাই গত মাসে আপনার সন্তানের overall score। সবুজ মানে ভালো করছে। একটু নিচে নামলে প্রতিটা subject-এর ফল পাবেন — কোনটায় একটু বেশি মনোযোগ দরকার, সেটাও বোঝা যাবে।"</div></div>
+        <div class="warn bn"><b>সতর্কতা:</b> পরের মাসে নির্দিষ্ট নম্বর বা rank-এর নিশ্চয়তা দেবেন না।</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="top"><div class="sn">2</div><div class="st"><h3 class="bn">Trial / Free Guardian Report চাইছেন</h3><div class="sit">এদের automatic SMS যায় না।</div><span class="goal bn">লক্ষ্য: CRM থেকে WhatsApp-এ link পাঠানো</span></div></div>
+      <div class="bd">
+        <ol class="steps">
+          <li>Guardian-এর <b>lead</b> CRM-এ খুলুন।</li>
+          <li><b>WhatsApp</b> option দিয়ে report-এর link পাঠান।</li>
+          <li>আগেই বলে রাখুন — সন্তান নতুন হলে কিছু জায়গা এখনো খালি থাকতে পারে।</li>
+          <li>Line-এ থেকে link খুলতে সাহায্য করুন (Scenario 1-এর ধাপ)।</li>
+        </ol>
+        <div class="script"><div class="lbl">বলতে পারেন এভাবে</div><div class="say">"আপনাকে এখনই WhatsApp-এ report-এর link পাঠিয়ে দিচ্ছি। খুলে একসাথে দেখি, কোনো login লাগবে না।"</div></div>
+        <div class="warn bn"><b>সতর্কতা:</b> trial/free report-এ তথ্য কম থাকতে পারে — এটাকে সমস্যা হিসেবে না বলে স্বাভাবিক হিসেবে বলুন।</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="top"><div class="sn">3</div><div class="st"><h3 class="bn">Score / Number বুঝছেন না</h3><div class="sit">"এই স্কোরটা কীভাবে এলো?"</div><span class="goal bn">লক্ষ্য: সহজ ভাষায় আশ্বস্ত করা — formula না বানিয়ে</span></div></div>
+      <div class="bd">
+        <ol class="steps">
+          <li>রঙ দিয়ে বোঝান — সবুজ ভালো, হলুদ মোটামুটি, লাল-এ practice দরকার।</li>
+          <li>বলুন এটা গত মাসের <b>ক্লাস ও পরীক্ষার ফল</b> মিলিয়ে হিসাব করা।</li>
+          <li>screen-এর <span class="ui">কীভাবে নির্ধারিত হয়</span> বাটন দেখান — ওখানে বিস্তারিত আছে।</li>
+          <li>আরও বিস্তারিত হিসাব চাইলে note নিয়ে team-কে জানান।</li>
+        </ol>
+        <div class="script"><div class="lbl">বলতে পারেন এভাবে</div><div class="say">"এই স্কোরটা গত মাসে ক্লাস আর পরীক্ষায় কেমন করেছে, তা মিলিয়ে বের করা হয়। screen-এ ‘কীভাবে নির্ধারিত হয়’ লেখা জায়গায় চাপ দিলে আরও বিস্তারিত দেখতে পাবেন।"</div></div>
+        <div class="warn bn"><b>সতর্কতা:</b> নিজে থেকে কোনো হিসাবের নিয়ম বা শতাংশ বানিয়ে বলবেন না।</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="top"><div class="sn">4</div><div class="st"><h3 class="bn">"তথ্য ভুল / অন্য Student দেখাচ্ছে"</h3><div class="sit">Guardian ভুল data-র অভিযোগ করছেন।</div><span class="goal bn">লক্ষ্য: শান্ত থেকে যাচাই ও escalate</span></div></div>
+      <div class="bd">
+        <ol class="steps">
+          <li>দুঃখ প্রকাশ করুন, তাড়াহুড়ো করবেন না।</li>
+          <li>সন্তানের <b>নাম ও class</b> মিলিয়ে নিন।</li>
+          <li>নিজে থেকে কারণ ব্যাখ্যা করবেন না।</li>
+          <li>lead যাচাই করে বিষয়টা <b>team/Product</b>-কে জানান।</li>
+          <li>অন্য কারও তথ্য থাকলে guardian-এর privacy রক্ষা করুন।</li>
+        </ol>
+        <div class="script"><div class="lbl">বলতে পারেন এভাবে</div><div class="say">"দুঃখিত, বিষয়টা আমি এখনই দেখছি। একটু আপনার সন্তানের নাম আর class বলবেন? মিলিয়ে নিয়ে ঠিক করে জানাচ্ছি।"</div></div>
+        <div class="warn bn"><b>সতর্কতা:</b> অনুমান করে কারণ বলবেন না।</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="top"><div class="sn">5</div><div class="st"><h3 class="bn">Report পাননি / Link খুলছে না</h3><div class="sit">"link পাইনি" বা "খুলছে না"।</div><span class="goal bn">লক্ষ্য: আবার পাঠিয়ে খুলতে সাহায্য করা</span></div></div>
+      <div class="bd">
+        <ol class="steps">
+          <li>number ঠিক আছে কিনা মিলিয়ে, আবার <b>WhatsApp</b>-এ link পাঠান।</li>
+          <li>internet connection দেখে আবার tap করতে বলুন।</li>
+          <li>তাও না হলে link-টা <b>Chrome</b> browser-এ খুলতে বলুন।</li>
+          <li>এরপরও না হলে বিষয়টা team-কে জানান।</li>
+        </ol>
+        <div class="script"><div class="lbl">বলতে পারেন এভাবে</div><div class="say">"কোনো সমস্যা নেই, আমি আবার পাঠিয়ে দিচ্ছি। একটু internet আছে কিনা দেখে link-এ চাপ দিন — না খুললে Chrome-এ খুলে দেখুন, হয়ে যাবে।"</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENS -->
+  <section id="screens">
+    <div class="shead"><span class="num">04</span><h2>Screen Reference</h2><span class="meta">নম্বর মিলিয়ে দেখুন</span></div>
+    <div class="navnote">
+      <b class="bn">নিচে ৩টি tab:</b>
+      <div class="tabs"><span class="tab">রেজাল্ট</span><span class="tab">পড়াশোনা</span><span class="tab">লিডারবোর্ড</span></div>
+      <div class="bn" style="margin-top:9px;color:#D7DCF2"><b>বিষয়</b> ও <b>চ্যাপ্টার</b> screen tap করে খুলতে হয়। প্রতিটা screenshot-এর নম্বর নিচের তালিকার নম্বরের সাথে মেলে।</div>
+    </div>
+
+    <!-- Result -->
+    <div class="screen">
+      <div class="shot"><img src="assets/annot-01-result-page.png" alt="রেজাল্ট screen annotated"></div>
+      <div class="bd">
+        <span class="tag">রেজাল্ট · Result</span>
+        <h3>প্রথম screen — পুরো মাস এক নজরে</h3>
+        <div class="where">কোথায়: link খুললেই আসে। নিচের <span class="ui">রেজাল্ট</span> tab।</div>
+        <div class="legend">
+          <div class="li"><div class="b">1</div><div><div class="t">সার্বিক স্কোর</div><div class="m">গত মাসের overall score ও রঙ; পাশে আগের মাসের তুলনায় বেড়েছে/কমেছে।</div><div class="s"><b>বলুন:</b> "এটাই গত মাসের overall ফল।"</div></div></div>
+          <div class="li"><div class="b">2</div><div><div class="t">বিষয়ভিত্তিক পারফরম্যান্স</div><div class="m">প্রতিটি subject-এর score ও রঙ। লাল = practice দরকার।</div><div class="s"><b>বলুন:</b> "কোন subject-এ মনোযোগ দরকার, এখানে বোঝা যাবে।"</div></div></div>
+          <div class="li"><div class="b">3</div><div><div class="t">কতটা নিয়মিত</div><div class="m">গত মাসে কতগুলো লাইভ ক্লাস ও practice করেছে।</div></div></div>
+          <div class="li"><div class="b">4</div><div><div class="t">শিক্ষকের নোট</div><div class="m">সন্তানের অগ্রগতি নিয়ে ছোট একটা মন্তব্য।</div></div></div>
+          <div class="li"><div class="b">5</div><div><div class="t">সেরা মুহূর্ত</div><div class="m">গত মাসে সবচেয়ে ভালো দিকটি — চাইলে share করা যায়।</div></div></div>
+          <div class="li"><div class="b">6</div><div><div class="t">সাপ্তাহিক ট্রেন্ড</div><div class="m">সপ্তাহে সপ্তাহে কেমন যাচ্ছে, একটা chart-এ।</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subject -->
+    <div class="screen">
+      <div class="shot"><img src="assets/annot-02-subject-page.png" alt="বিষয় screen annotated"></div>
+      <div class="bd">
+        <span class="tag">বিষয় · Subject</span>
+        <h3>একটা subject-এর বিস্তারিত</h3>
+        <div class="where">কোথায়: <span class="ui">রেজাল্ট</span>-এ কোনো subject-এ <span class="tap">tap</span> করলে।</div>
+        <div class="legend">
+          <div class="li"><div class="b">1</div><div><div class="t">বিষয়ের গড় স্কোর</div><div class="m">এই subject-এ গত মাসের ফল ও রঙ।</div></div></div>
+          <div class="li"><div class="b">2</div><div><div class="t">এই বিষয়ে র‍্যাঙ্ক</div><div class="m">এই subject-এ সন্তানের বর্তমান অবস্থান।</div></div></div>
+          <div class="li"><div class="b">3</div><div><div class="t">ক্লাস ও এক্সাম</div><div class="m">কতটা ক্লাস complete, আর chapter exam score।</div></div></div>
+          <div class="li"><div class="b">4</div><div><div class="t">লার্নিং অ্যাক্টিভিটি</div><div class="m">কতগুলো quiz ও resource করেছে।</div></div></div>
+          <div class="li"><div class="b">5</div><div><div class="t">চ্যাপ্টার পারফরম্যান্স</div><div class="m">chapter তিন ভাগে — উন্নতির প্রয়োজন / মডারেট / ভালো।</div><div class="s"><b>বলুন:</b> "লাল অংশের chapter থেকে practice শুরু করলে ভালো।"</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter -->
+    <div class="screen">
+      <div class="shot"><img src="assets/annot-03-chapter-page.png" alt="চ্যাপ্টার screen annotated"></div>
+      <div class="bd">
+        <span class="tag">চ্যাপ্টার · Chapter</span>
+        <h3>একটা chapter-এর বিস্তারিত</h3>
+        <div class="where">কোথায়: Subject screen-এ কোনো chapter-এ <span class="tap">tap</span> করলে।</div>
+        <div class="legend">
+          <div class="li"><div class="b">1</div><div><div class="t">চ্যাপ্টারের স্কোর ও ব্যান্ড</div><div class="m">এই chapter-এর ফল ও রঙ।</div></div></div>
+          <div class="li"><div class="b">2</div><div><div class="t">চ্যাপ্টারের সময়কাল</div><div class="m">কবে শুরু, শেষ ও ফলাফল প্রকাশ।</div></div></div>
+          <div class="li"><div class="b">3</div><div><div class="t">র‍্যাঙ্ক ও গ্রেড</div><div class="m">এই chapter-এর rank ও grade।</div></div></div>
+          <div class="li"><div class="b">4</div><div><div class="t">ক্লাস ও এক্সাম স্কোর</div><div class="m">chapter-এর ক্লাস completion ও exam score।</div></div></div>
+          <div class="li"><div class="b">5</div><div><div class="t">চ্যাপ্টার এক্সামের ফল</div><div class="m">পরীক্ষার প্রতিটি অংশের নম্বর।</div></div></div>
+          <div class="li"><div class="b">6</div><div><div class="t">সংশ্লিষ্ট ভিডিও</div><div class="m">chapter-এর video ও lesson — আবার দেখা যায়।</div><div class="s"><b>বলুন:</b> "এই video দেখে সন্তান আবার practice করতে পারবে।"</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Study -->
+    <div class="screen">
+      <div class="shot"><img src="assets/annot-04-study-page.png" alt="পড়াশোনা screen annotated"></div>
+      <div class="bd">
+        <span class="tag">পড়াশোনা · Study</span>
+        <h3>কতটা নিয়মিত ছিল</h3>
+        <div class="where">কোথায়: নিচের <span class="ui">পড়াশোনা</span> tab।</div>
+        <div class="legend">
+          <div class="li"><div class="b">1</div><div><div class="t">লাইভ ক্লাস সারসংক্ষেপ</div><div class="m">কতটা হয়েছে, করেছে, recording-এ দেখেছে, miss করেছে।</div></div></div>
+          <div class="li"><div class="b">2</div><div><div class="t">বিষয় অনুযায়ী হিসাব</div><div class="m">প্রতিটি subject-এ ক্লাস — হয়েছে / করেছে / মিস।</div></div></div>
+          <div class="li"><div class="b">3</div><div><div class="t">তারিখ অনুযায়ী ক্যালেন্ডার</div><div class="m">প্রতিটি দিন রঙ করা — কোন দিন ক্লাস করেছে, কোন দিন বাদ গেছে।</div><div class="s"><b>বলুন:</b> "এই ক্যালেন্ডারে দিন ধরে নিয়মিততা দেখা যায়।"</div></div></div>
+          <div class="li"><div class="b">4</div><div><div class="t">চ্যাপ্টার এক্সাম প্রোগ্রেস</div><div class="m">কতগুলো chapter exam দিয়েছে।</div></div></div>
+          <div class="li"><div class="b">5</div><div><div class="t">মোট অ্যাক্টিভিটি</div><div class="m">lesson, recording, quiz ও resource-এর মোট হিসাব।</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leaderboard -->
+    <div class="screen">
+      <div class="shot"><img src="assets/annot-05-leaderboard.png" alt="লিডারবোর্ড screen annotated"></div>
+      <div class="bd">
+        <span class="tag">লিডারবোর্ড · Leaderboard</span>
+        <h3>অন্যদের তুলনায় অবস্থান</h3>
+        <div class="where">কোথায়: নিচের <span class="ui">লিডারবোর্ড</span> tab।</div>
+        <div class="legend">
+          <div class="li"><div class="b">1</div><div><div class="t">সেরা তিনজন</div><div class="m">শীর্ষ তিন student, তাদের score ও কলেজসহ।</div></div></div>
+          <div class="li"><div class="b">2</div><div><div class="t">র‍্যাঙ্ক তালিকা</div><div class="m">এরপরের অবস্থানগুলো ক্রম অনুযায়ী।</div></div></div>
+          <div class="li"><div class="b">3</div><div><div class="t">সন্তানের নিজের র‍্যাঙ্ক</div><div class="m">একদম নিচে আলাদা করে — সাথে মোট কতজন student।</div><div class="s"><b>বলুন:</b> "নিচে আপনার সন্তানের নিজের rank আলাদা করে দেওয়া আছে।"</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="shead"><span class="num">05</span><h2>Guardian-এর প্রশ্ন ও উত্তর</h2></div>
+    <div class="faq">
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>Report তো পাইনি।</div>
+        <div class="ans">জি, এখনই আপনার WhatsApp-এ link-টা আবার পাঠিয়ে দিচ্ছি। একটু দেখবেন এসেছে কিনা।</div>
+        <div class="act"><b>Agent কী করবেন</b>CRM lead থেকে number মিলিয়ে WhatsApp-এ আবার পাঠান।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>Link খুলছে না।</div>
+        <div class="ans">internet একটু দেখে আবার চাপ দিন। না হলে Chrome-এ খুলুন, খুলে যাবে।</div>
+        <div class="act"><b>Agent কী করবেন</b>আবার পাঠান; তাও না হলে team-কে জানান।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>সন্তানের score খুঁজে পাচ্ছি না।</div>
+        <div class="ans">একদম উপরে বড় number-টাই overall score; একটু নিচে নামলে প্রতিটা subject-এর ফল।</div>
+        <div class="act"><b>Agent কী করবেন</b>তারা <span class="ui">রেজাল্ট</span> tab-এ আছে কিনা দেখে, উপর থেকে নিচে ধীরে guide করুন।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>Score-এর মানে বুঝছি না, এটা কীভাবে এলো?</div>
+        <div class="ans">গত মাসের <b>ক্লাস</b> আর <b>পরীক্ষার</b> ফল সমান ভাগে (৫০–৫০) মিলিয়ে স্কোর হয়। ৮০-র বেশি হলে সবুজ (ভালো), ৬০ থেকে ৮০ হলুদ (মোটামুটি), ৬০-র নিচে লাল (practice দরকার)।</div>
+        <div class="act"><b>Agent কী জানবেন</b>এটিই আসল হিসাব; screen-এর <span class="ui">কীভাবে নির্ধারিত হয়</span> বাটনেও আছে।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>কিছু জায়গা খালি / "--"।</div>
+        <div class="ans">সন্তান সম্ভবত নতুন, অথবা গত মাসে ক্লাস কম করেছে; নিয়মিত হলে ধীরে ধীরে ভরে যাবে।</div>
+        <div class="act"><b>Agent কী করবেন</b>enrollment নতুন কিনা দেখুন; data নিয়ে সন্দেহ হলে team-কে জানান।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>ক্লাসের এই শতাংশ কীভাবে হিসাব হয়?</div>
+        <div class="ans">গত মাসে যতগুলো লাইভ ক্লাস নির্ধারিত ছিল, তার মধ্যে সন্তান কতগুলো করেছে — সেটার শতকরা।</div>
+        <div class="act"><b>Agent কী জানবেন</b>এখন শুধু করা লাইভ ক্লাস গোনা হয়; পরে recording দেখাও যুক্ত হতে পারে (internal)।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>পড়াশোনা-র ক্যালেন্ডারে রঙগুলো কী বোঝায়?</div>
+        <div class="ans">সবুজ = ঐ দিনের সব ক্লাস করেছে, মাঝারি রঙ = আংশিক করেছে, লাল = মিস করেছে।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>অন্য কেউ কি এই link খুলতে পারবে?</div>
+        <div class="ans">যার কাছে link থাকবে সে খুলতে পারবে, আলাদা password নেই। তাই link-টা নিজের কাছে রাখবেন।</div>
+        <div class="act"><b>Agent কী করবেন</b>link শুধু ঐ সন্তানের guardian-কেই পাঠান — privacy রক্ষা করুন।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>App-এর সাথে মিলছে না।</div>
+        <div class="ans">report গত মাসের একটা স্থির ছবি; app-এ live তথ্য থাকে, তাই অল্প পার্থক্য স্বাভাবিক।</div>
+        <div class="act"><b>Agent কী করবেন</b>বড় গরমিল হলে উদাহরণসহ team-কে জানান।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>Rank কীভাবে হিসাব হয়?</div>
+        <div class="ans">একই program-এর অন্য student-দের স্কোরের তুলনায় সন্তানের অবস্থান — স্কোর বেশি হলে rank উপরে। <span class="ui">লিডারবোর্ড</span>-এ নিচে নিজের rank দেখা যায়।</div>
+        <div class="act"><b>Agent কী জানবেন</b>তুলনা একই program/batch-এর student-দের মধ্যে, স্কুল আলাদা করে নয়।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>এটা কি শুধু paid-দের জন্য?</div>
+        <div class="ans">Report সবাই দেখতে পারেন; paid guardian-রা automatic পান, আর আপনাকে আমি নিজে পাঠিয়ে দিতে পারি।</div>
+        <div class="act"><b>Agent কী করবেন</b>trial/free হলে CRM থেকে WhatsApp-এ link পাঠান।</div></div>
+      <div class="qa"><div class="q"><span class="mk">Guardian</span>সন্তানের ফল কীভাবে ভালো করব?</div>
+        <div class="ans">লাল subject/chapter-এ একটু বেশি practice করালে ভালো; report-এ ওই chapter-এর video-ও আছে।</div>
+        <div class="act"><b>Agent কী করবেন</b>গঠনমূলকভাবে বলুন; নির্দিষ্ট নম্বর/rank-এর নিশ্চয়তা দেবেন না।</div></div>
+    </div>
+  </section>
+
+  <footer>Shikho Learning Report · internal Customer Care playbook</footer>
+
+  </div><!-- /#guide -->
+</div>
+
+<div id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+  var btn=document.getElementById('copyBtn');
+  var guide=document.getElementById('guide');
+  var toastEl=document.getElementById('toast');
+  var imgs=[].slice.call(guide.querySelectorAll('img'));
+  var dataURIs=new Array(imgs.length).fill(null);
+  var BOX={mast:1,panel:1,scenario:1,script:1,warn:1,navnote:1,screen:1,qa:1,confirm:1,helpbox:1,tabchip:1,dcard:1};
+
+  function toast(m){try{toastEl.textContent=m;toastEl.hidden=false;clearTimeout(toastEl._t);toastEl._t=setTimeout(function(){toastEl.hidden=true;},3000);}catch(e){}}
+  function toDataURL(src){return fetch(src).then(function(r){return r.blob();}).then(function(b){return new Promise(function(res){var fr=new FileReader();fr.onload=function(){res(fr.result);};fr.onerror=function(){res(null);};fr.readAsDataURL(b);});}).catch(function(){return null;});}
+  function prebuild(){imgs.forEach(function(im,i){ if(im.src.indexOf('data:')===0){dataURIs[i]=im.src;} else {toDataURL(im.src).then(function(d){dataURIs[i]=d;});} });}
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function hasBox(el){if(!el.classList)return false;for(var k in BOX){if(el.classList.contains(k))return true;}return false;}
+  function tS(cs){return 'color:'+cs.color+';font-family:'+cs.fontFamily+';font-size:'+cs.fontSize+';font-weight:'+cs.fontWeight+';font-style:'+cs.fontStyle+';text-align:'+cs.textAlign+';line-height:'+cs.lineHeight+';text-transform:'+cs.textTransform+';letter-spacing:'+cs.letterSpacing+';';}
+  function bS(cs){return 'background-color:'+cs.backgroundColor+';border-top:'+cs.borderTopWidth+' '+cs.borderTopStyle+' '+cs.borderTopColor+';border-right:'+cs.borderRightWidth+' '+cs.borderRightStyle+' '+cs.borderRightColor+';border-bottom:'+cs.borderBottomWidth+' '+cs.borderBottomStyle+' '+cs.borderBottomColor+';border-left:'+cs.borderLeftWidth+' '+cs.borderLeftStyle+' '+cs.borderLeftColor+';border-radius:'+cs.borderRadius+';padding:'+cs.paddingTop+' '+cs.paddingRight+' '+cs.paddingBottom+' '+cs.paddingLeft+';';}
+  function imgData(el){var i=imgs.indexOf(el);return (i>=0&&dataURIs[i])?dataURIs[i]:el.src;}
+  function ser(node){
+    if(node.nodeType===3)return esc(node.nodeValue);
+    if(node.nodeType!==1)return '';
+    var el=node,tag=el.tagName.toLowerCase();
+    if(tag==='script'||tag==='style'||tag==='button'||tag==='video'||tag==='source')return '';
+    if(el.classList&&(el.classList.contains('quicknav')||el.classList.contains('videowrap')))return '';
+    if(tag==='img')return '<img src="'+imgData(el)+'" style="display:block;max-width:300px;height:auto;margin:6px 0">';
+    if(tag==='br')return '<br>';
+    var cs=getComputedStyle(el),inner='';
+    for(var i=0;i<el.childNodes.length;i++)inner+=ser(el.childNodes[i]);
+    if(hasBox(el))return '<table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:separate;margin:0 0 10px"><tr><td style="'+bS(cs)+tS(cs)+'">'+inner+'</td></tr></table>';
+    if(tag==='h1'||tag==='h2'||tag==='h3'||tag==='h4')return '<div style="'+tS(cs)+'margin:12px 0 4px">'+inner+'</div>';
+    if(tag==='ul'||tag==='ol')return '<'+tag+' style="'+tS(cs)+'margin:6px 0 6px 22px">'+inner+'</'+tag+'>';
+    if(tag==='li')return '<li style="'+tS(cs)+'margin:3px 0">'+inner+'</li>';
+    if(tag==='b'||tag==='strong')return '<strong style="'+tS(cs)+'">'+inner+'</strong>';
+    if(tag==='span'||tag==='a')return '<span style="'+tS(cs)+'">'+inner+'</span>';
+    return '<div style="'+tS(cs)+'margin:4px 0">'+inner+'</div>';
+  }
+  function buildDocHTML(){var inner='';for(var i=0;i<guide.childNodes.length;i++)inner+=ser(guide.childNodes[i]);return '<div style="background:#ffffff;padding:8px;font-family:Inter,Arial,sans-serif;color:#191C24">'+inner+'</div>';}
+  function reset(){btn.textContent='পুরো Guide Copy করুন';btn.classList.remove('done');}
+  function ok(){btn.textContent='Copy হয়েছে ✓';btn.classList.add('done');btn.disabled=false;toast('Copy হয়েছে — এখন Google Docs বা Email-এ paste করুন।');setTimeout(reset,3000);}
+  function doCopy(){
+    btn.disabled=true;
+    (async function(){
+      try{var jobs=imgs.map(function(im,i){ if(dataURIs[i])return Promise.resolve(); return toDataURL(im.src).then(function(d){dataURIs[i]=d;});});await Promise.all(jobs);}catch(e){}
+      var html=null;try{html=buildDocHTML();}catch(e){}
+      try{
+        if(html&&navigator.clipboard&&window.ClipboardItem){
+          await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([guide.innerText],{type:'text/plain'})})]);ok();return;
+        }
+        throw 0;
+      }catch(e){
+        try{await navigator.clipboard.writeText(guide.innerText);ok();return;}catch(e2){}
+        btn.disabled=false;reset();toast('Copy করা গেল না।');
+      }
+    })();
+  }
+  if(btn){btn.addEventListener('click',doCopy);}
+  if(window.requestIdleCallback){requestIdleCallback(prebuild);}else{setTimeout(prebuild,500);}
+})();
+</script>
