@@ -2,7 +2,6 @@ import base64, os
 BASE="/home/shikho/shareable report card"
 LOGO=open("/home/shikho/Desktop/Laptop Backup/Brac-Teacher-Demo-main (3)/Brac-Teacher-Demo-main/public/shikho-logo.svg",encoding="utf-8").read().strip()
 def b64(p): return base64.b64encode(open(os.path.join(BASE,p),'rb').read()).decode()
-vid="data:video/mp4;base64,"+b64("email-assets/walkthrough.mp4")
 imgs={k:"data:image/png;base64,"+b64("email-assets/"+v) for k,v in {
  "result":"01-result-page.png","subject":"02-subject-page.png","chapter":"03-chapter-page.png",
  "study":"04-study-page.png","leader":"05-leaderboard.png"}.items()}
@@ -53,11 +52,17 @@ h1,h2,h3{margin:0;line-height:1.24}
 /* ---------- HERO ---------- */
 .hero{position:relative;overflow:hidden;border-radius:26px;padding:30px;box-shadow:var(--sh2);
 background:radial-gradient(120% 140% at 85% 10%,#9A2FA0 0%,rgba(154,47,160,0) 42%),linear-gradient(135deg,#12264D,#355DAB 72%)}
-.hero .grid{display:grid;grid-template-columns:260px 1fr;gap:30px;align-items:center;position:relative;z-index:1}
-.hero video{width:100%;display:block;border-radius:22px;border:3px solid rgba(255,255,255,.16);background:#000;box-shadow:0 22px 50px rgba(0,0,0,.4)}
-.hero .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#FFC0E6;display:flex;align-items:center;gap:7px}
-.hero h1{color:#fff;font-size:1.95rem;font-weight:800;letter-spacing:-.01em;margin:10px 0 6px}
-.hero p{color:#CFDBF2;margin:0 0 16px;font-size:1rem}
+.hero .grid{display:grid;grid-template-columns:1fr 288px;gap:30px;align-items:center;position:relative;z-index:1}
+.hero .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#FFC0E6}
+.hero h1{color:#fff;font-size:2.1rem;font-weight:800;letter-spacing:-.01em;margin:10px 0 8px}
+.hero p{color:#CFDBF2;margin:0 0 18px;font-size:1.04rem}
+.herocard{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:20px 22px;color:#fff;box-shadow:0 14px 34px rgba(0,0,0,.22)}
+.herocard .hc-top{font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#BFD2F3}
+.herocard .hc-score{font-size:3.1rem;font-weight:800;line-height:1.05;margin:6px 0 2px;color:#fff}
+.herocard .hc-score span{font-size:1.5rem;font-weight:700;color:#A7F3D0;margin-left:3px}
+.herocard .hc-bar{height:10px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden;margin:8px 0 12px}
+.herocard .hc-bar i{display:block;height:100%;width:92%;border-radius:999px;background:linear-gradient(90deg,#6EE7B7,#34D399)}
+.herocard .hc-row{display:flex;justify-content:space-between;font-size:.9rem;color:#CFDBF2;font-weight:600}
 .hero .pills{display:flex;flex-wrap:wrap;gap:9px}
 .hero .pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:999px;padding:8px 14px;font-size:.92rem;font-weight:600}
 .hero .pill i{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
@@ -162,7 +167,7 @@ footer{margin-top:46px;color:var(--ink3);font-size:.85rem;text-align:center;font
  body{font-size:16px}
  .hero{padding:22px}
  .hero .grid{grid-template-columns:1fr;gap:20px}
- .hero video{max-width:260px;margin:0 auto}
+ .hero h1{font-size:1.85rem}
  .screen{grid-template-columns:1fr;gap:16px;padding:18px 18px 18px 22px}
  .shot{max-width:280px;margin:0 auto}
  .tile-row{grid-template-columns:1fr}
@@ -188,17 +193,22 @@ BODY=f"""
 
 <div class="hero">
  <div class="grid">
-  <video controls muted playsinline preload="metadata"><source src="{vid}" type="video/mp4"></video>
   <div class="htext">
-    <div class="eyebrow">{ic('play',15)} ৬০ সেকেন্ডের ওয়াকথ্রু</div>
+    <div class="eyebrow">Customer Care · Internal Guideline</div>
     <h1>Shikho Learning Report</h1>
-    <p class="bn">Guardian-কে বোঝানোর আগে ভিডিওতে পুরো রিপোর্টটা একবার দেখে নিন — তারপর নিচের ব্লকগুলো।</p>
+    <p class="bn">Guardian-কে Learning Report বোঝানো আর সাধারণ সমস্যা দ্রুত সমাধানের গাইড।</p>
     <div class="pills bn">
       <span class="pill"><i style="background:#67E8C0"></i>Overall Score</span>
       <span class="pill"><i style="background:#FFC978"></i>Attendance</span>
       <span class="pill"><i style="background:#FF8FD0"></i>Rank</span>
       <span class="pill"><i style="background:#9EC2FF"></i>Teacher's Note</span>
     </div>
+  </div>
+  <div class="herocard">
+    <div class="hc-top bn">সার্বিক স্কোর · উদাহরণ</div>
+    <div class="hc-score bn">৯২<span>%</span></div>
+    <div class="hc-bar"><i></i></div>
+    <div class="hc-row bn"><span>ক্লাস ৮৮%</span><span>এক্সাম ৯৬%</span></div>
   </div>
  </div>
 </div>
