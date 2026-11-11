@@ -1,4 +1,4 @@
-# Shikho Learning Report — Care Team Guideline
+# Shikho Learning Report - Guideline
 
 Internal reference for Shikho's Customer Care team on the **Shikho Learning Report** — a monthly link sent to parents showing how their child did last month: overall score, each subject, weak chapters, how regular they were, and leaderboard position. No app or login — just a link.
 
