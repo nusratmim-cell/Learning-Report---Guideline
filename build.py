@@ -22,6 +22,7 @@ ICONS={
  "sms":'<path d="M21 14a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/><path d="M8 10h8M8 13h5"/>',
  "spark":'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/>',
  "play":'<circle cx="12" cy="12" r="9.2"/><path d="M10 8.5v7l6-3.5z" fill="currentColor" stroke="none"/>',
+ "external":'<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
 }
 def ic(name,size=22): return f'<svg width="{size}" height="{size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{ICONS[name]}</svg>'
 
@@ -80,6 +81,8 @@ background:radial-gradient(120% 140% at 85% 10%,#9A2FA0 0%,rgba(154,47,160,0) 42
 .g-teal{background:linear-gradient(145deg,#1cb0b6,#0A777C)}
 .shead .k{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
 .shead h2{font-size:1.32rem;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.slead{color:var(--ink2);margin:-6px 0 14px;padding-left:60px;font-family:var(--bn)}
+.slead b{color:var(--ink);font-weight:800}
 
 /* ---------- SCREEN CARDS ---------- */
 .screen{--a:var(--navy);--as:var(--navy-s);position:relative;overflow:hidden;display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:center;
@@ -111,12 +114,30 @@ background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 22p
 .tile.b-orange{background:var(--orange-s);border-color:#F3DFB6}
 .tile.b-purple{background:var(--purple-s);border-color:#E7CFEC}
 
+/* tab-bar style switcher (Overview) */
+.tabbar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;background:#EFEDE6;border:1px solid var(--line);border-radius:18px;padding:7px}
+.tabbar .seg{border-radius:13px;padding:16px 10px 15px;text-align:center;background:transparent}
+.tabbar .seg.active{background:#fff;box-shadow:var(--sh)}
+.tabbar .seg .ti{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;margin:0 auto 9px}
+.tabbar .seg h4{font-size:1.04rem;font-weight:800;margin:0 0 2px;color:var(--ink)}
+.tabbar .seg p{margin:0;font-size:.86rem;color:var(--ink3)}
+
+/* Figma CTA */
+.figmacta{display:flex;align-items:center;gap:14px;margin-top:16px;text-decoration:none;color:var(--ink);
+background:linear-gradient(135deg,#fff,#F4EEFA);border:1px solid #E4D7F0;border-left:5px solid var(--purple);border-radius:16px;padding:15px 18px;box-shadow:var(--sh)}
+.figmacta .fi{flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:linear-gradient(145deg,#a94dbd,#731d86);color:#fff;display:grid;place-items:center}
+.figmacta .txt{flex:1}
+.figmacta .txt b{display:block;font-weight:800;font-family:var(--bn);line-height:1.3}
+.figmacta .txt span{font-size:.9rem;color:var(--ink3)}
+.figmacta .arr{color:var(--purple);font-size:1.35rem;font-weight:800;flex:0 0 auto}
+
 .meter{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px}
 .meter .lbl{font-size:.82rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
 .meter .track{height:14px;border-radius:999px;background:linear-gradient(90deg,#D5415E,#E0A800 50%,#2C9A5C)}
 .meter .legs{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px}
 .meter .leg{display:flex;align-items:center;gap:8px;font-size:.95rem;color:var(--ink2);font-family:var(--bn)}
 .meter .leg i{width:12px;height:12px;border-radius:4px;flex:0 0 auto}
+.meter .mnote{margin-top:12px;padding-top:11px;border-top:1px solid var(--line2);font-size:.9rem;color:var(--ink3);font-family:var(--bn)}
 .callout{margin-top:16px;background:var(--mag-s);border:1px solid #F3C9E2;border-left:4px solid var(--mag);border-radius:0 14px 14px 0;padding:14px 16px;color:#8A1560;font-weight:700;font-family:var(--bn)}
 .callout b{color:var(--mag)}
 
@@ -172,6 +193,9 @@ footer{margin-top:46px;color:var(--ink3);font-size:.85rem;text-align:center;font
  .screen{grid-template-columns:1fr;gap:16px;padding:18px 18px 18px 22px}
  .shot{max-width:280px;margin:0 auto}
  .tile-row{grid-template-columns:1fr}
+ .slead{padding-left:0}
+ .tabbar .seg{padding:13px 6px}
+ .tabbar .seg p{font-size:.78rem}
  .flowgrid,.cardgrid,.checks{grid-template-columns:1fr}
 }
 """
@@ -215,33 +239,40 @@ BODY=f"""
 </div>
 
 <div class="sec">
- <div class="shead"><span class="sico g-navy">{ic('grid')}</span><div><div class="k">Screen Guide · 01</div><h2 class="bn">কোন Screen-এ কী দেখায়</h2></div></div>
- {screen('navy','target',imgs['result'],"রেজাল্ট — Overall Score",["<b>সার্বিক স্কোর ও ব্যান্ড</b> — আগের মাসের তুলনা সহ","<b>বিষয়ভিত্তিক স্কোর</b> — রঙ দিয়ে ভালো / দুর্বল","নিয়মিততা, শিক্ষকের নোট ও সেরা অর্জন"])}
- {screen('mag','book',imgs['subject'],"Subject — বিষয়ে চাপ দিলে",["<b>গড় স্কোর</b> ও এই বিষয়ে র‍্যাঙ্ক","ক্লাস কমপ্লিশন ও এক্সাম স্কোর","<b>চ্যাপ্টার পারফরম্যান্স</b> — দুর্বল / মডারেট / ভালো"])}
- {screen('teal','grid',imgs['chapter'],"Chapter — চ্যাপ্টারে চাপ দিলে",["<b>এক্সাম স্কোর</b>, র‍্যাঙ্ক ও গ্রেড","ক্লাস ও এক্সামের হিসাব","<b>সংশ্লিষ্ট ভিডিও ও Lesson</b> — আবার দেখে Practice"])}
- {screen('orange','calendar',imgs['study'],"পড়াশোনা — Class ও Activity",["<b>লাইভ ক্লাস</b> — কত করেছে, মিস করেছে","<b>Calendar</b> — দিন ধরে রঙে অ্যাটেন্ডেন্স","চ্যাপ্টার এক্সাম ও লার্নিং এক্টিভিটি"])}
- {screen('purple','trophy',imgs['leader'],"লিডারবোর্ড — Rank",["সেরা তিনজন (Medal সহ)","র‍্যাঙ্ক তালিকা","<b>নিজের সন্তানের র‍্যাঙ্ক</b> ও মোট শিক্ষার্থী"])}
-</div>
-
-<div class="sec">
- <div class="shead"><span class="sico g-teal">{ic('columns')}</span><div><div class="k">Overview · 02</div><h2 class="bn">Report-এ কী আছে</h2></div></div>
+ <div class="shead"><span class="sico g-teal">{ic('columns')}</span><div><div class="k">Overview · 01</div><h2 class="bn">Report-এ কী আছে</h2></div></div>
+ <p class="slead bn">Report খুললে নিচে <b>৩টি Tab</b> দেখা যাবে — প্রতিটিতে আলাদা তথ্য।</p>
  <div class="block">
-  <div class="tile-row">
-    <div class="tile b-navy"><div class="ti g-navy">{ic('target',20)}</div><h4 class="bn">রেজাল্ট</h4><p class="bn">Score ও বিষয়</p></div>
-    <div class="tile b-orange"><div class="ti g-orange">{ic('calendar',20)}</div><h4 class="bn">পড়াশোনা</h4><p class="bn">Class ও Activity</p></div>
-    <div class="tile b-purple"><div class="ti g-purple">{ic('trophy',20)}</div><h4 class="bn">লিডারবোর্ড</h4><p class="bn">Rank</p></div>
+  <div class="tabbar">
+    <div class="seg active"><span class="ti g-navy">{ic('target',20)}</span><h4 class="bn">রেজাল্ট</h4><p class="bn">Score ও বিষয়</p></div>
+    <div class="seg"><span class="ti g-orange">{ic('calendar',20)}</span><h4 class="bn">পড়াশোনা</h4><p class="bn">Class ও Activity</p></div>
+    <div class="seg"><span class="ti g-purple">{ic('trophy',20)}</span><h4 class="bn">লিডারবোর্ড</h4><p class="bn">Rank</p></div>
   </div>
   <div class="meter">
-    <div class="lbl bn">Score-এর রঙ</div>
+    <div class="lbl bn">Score-এর রঙ — কী বোঝায়</div>
     <div class="track"></div>
     <div class="legs">
       <span class="leg"><i style="background:#D5415E"></i>লাল — Practice দরকার</span>
       <span class="leg"><i style="background:#E0A800"></i>হলুদ — আরও সুযোগ আছে</span>
       <span class="leg"><i style="background:#2C9A5C"></i>সবুজ — ভালো করছে</span>
     </div>
+    <div class="mnote bn">এই রঙ <b>Overall Score</b>, প্রতিটি <b>Subject</b> ও <b>Chapter</b>-এর ফলাফলে দেখা যায়।</div>
   </div>
   <div class="callout bn"><b>App বা Login লাগে না।</b> Report Link-এ চাপ দিলেই খোলে।</div>
  </div>
+</div>
+
+<div class="sec">
+ <div class="shead"><span class="sico g-navy">{ic('grid')}</span><div><div class="k">Screen Guide · 02</div><h2 class="bn">কোন Screen-এ কী দেখায়</h2></div></div>
+ {screen('navy','target',imgs['result'],"রেজাল্ট — Overall Score",["<b>সার্বিক স্কোর ও ব্যান্ড</b> — আগের মাসের তুলনা সহ","<b>বিষয়ভিত্তিক স্কোর</b> — রঙ দিয়ে ভালো / দুর্বল","নিয়মিততা, শিক্ষকের নোট ও সেরা অর্জন"])}
+ {screen('mag','book',imgs['subject'],"Subject — বিষয়ে চাপ দিলে",["<b>গড় স্কোর</b> ও এই বিষয়ে র‍্যাঙ্ক","ক্লাস কমপ্লিশন ও এক্সাম স্কোর","<b>চ্যাপ্টার পারফরম্যান্স</b> — দুর্বল / মডারেট / ভালো"])}
+ {screen('teal','grid',imgs['chapter'],"Chapter — চ্যাপ্টারে চাপ দিলে",["<b>এক্সাম স্কোর</b>, র‍্যাঙ্ক ও গ্রেড","ক্লাস ও এক্সামের হিসাব","<b>সংশ্লিষ্ট ভিডিও ও Lesson</b> — আবার দেখে Practice"])}
+ {screen('orange','calendar',imgs['study'],"পড়াশোনা — Class ও Activity",["<b>লাইভ ক্লাস</b> — কত করেছে, মিস করেছে","<b>Calendar</b> — দিন ধরে রঙে অ্যাটেন্ডেন্স","চ্যাপ্টার এক্সাম ও লার্নিং এক্টিভিটি"])}
+ {screen('purple','trophy',imgs['leader'],"লিডারবোর্ড — Rank",["সেরা তিনজন (Medal সহ)","র‍্যাঙ্ক তালিকা","<b>নিজের সন্তানের র‍্যাঙ্ক</b> ও মোট শিক্ষার্থী"])}
+ <a class="figmacta" href="https://www.figma.com/design/qdjZtQmPsqhhQE13BIiRMH/Parent---Shareable-Report-Card--DH-?node-id=1-7030&t=YYFieAgPdPNnD5ey-0" target="_blank" rel="noopener">
+   <span class="fi">{ic('external',22)}</span>
+   <span class="txt"><b class="bn">Figma-তে সম্পূর্ণ page ডিজাইন দেখুন</b><span>Full-page designs for every screen</span></span>
+   <span class="arr">→</span>
+ </a>
 </div>
 
 <div class="sec">
@@ -290,7 +321,8 @@ BODY=f"""
 </div>
 
 <div class="sec">
- <div class="shead"><span class="sico g-orange">{ic('check')}</span><div><div class="k">Escalation · 06</div><h2 class="bn">সমস্যায় যা তথ্য লাগবে</h2></div></div>
+ <div class="shead"><span class="sico g-orange">{ic('check')}</span><div><div class="k">Escalation · 06</div><h2 class="bn">আমাদের কাছে পাঠানোর আগে</h2></div></div>
+ <p class="slead bn">নিজে সমাধান করা না গেলে বিষয়টি টিমের কাছে <b>escalate</b> করুন — সাথে নিচের তথ্যগুলো দিন:</p>
  <div class="block">
   <div class="checks">
    <div class="chk bn"><span class="ck">{ic('check',15)}</span>Student-এর নাম ও Class</div>
