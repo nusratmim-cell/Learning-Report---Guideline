@@ -44,6 +44,13 @@ ul,ol{margin:6px 0 14px;padding-left:22px}li{margin:5px 0}
 .note b{font-weight:700}
 .callout{background:var(--navy-soft);border:1px solid #D7DFF6;border-left:4px solid var(--mag);border-radius:0 12px 12px 0;padding:13px 16px;margin:14px 0 4px;color:var(--navy2);font-size:1.04rem;font-weight:600}
 .callout b{color:var(--mag);font-weight:800}
+.flow{display:flex;flex-direction:column;align-items:center;margin:14px 0 4px}
+.fbox{width:100%;max-width:450px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;font-size:1rem;color:var(--ink)}
+.fbox .fn{flex:0 0 auto;width:27px;height:27px;border-radius:50%;background:var(--navy-soft);color:var(--navy2);font-weight:800;font-size:.86rem;display:grid;place-items:center;font-family:var(--sans)}
+.fbox.wa{border:1px solid #27C76A;border-left:4px solid #25D366}
+.fbox.sms{border:1px solid #C7D2F2;border-left:4px solid var(--navy)}
+.farrow{color:var(--ink3);font-size:1.35rem;line-height:1;padding:6px 0;display:flex;flex-direction:column;align-items:center;gap:3px}
+.farrow .albl{font-size:.8rem;color:var(--mag);font-weight:700;font-family:var(--bn)}
 .tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:10px 0 6px}
 .tab{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 12px;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
 .tab::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
@@ -96,6 +103,16 @@ footer{margin-top:48px;color:var(--ink3);font-size:.86rem;text-align:center;font
   <p class="bn">প্রতি মাসের শুরুতে আগের মাসের Learning Report-এর Link SMS-এর মাধ্যমে পাঠানো হবে।</p>
   <h3 class="lbl bn">Trial / Free Student</h3>
   <p class="bn">এক্ষেত্রে Automatic SMS যাবে না। CRM থেকে Report Link নিয়ে WhatsApp-এ পাঠাতে হবে।</p>
+  <h3 class="lbl bn">CRM থেকে Link পাঠানোর ধাপ</h3>
+  <div class="flow bn">
+    <div class="fbox"><span class="fn">1</span>CRM-এ <b>Lead Details</b> page খুলুন</div>
+    <div class="farrow">↓</div>
+    <div class="fbox"><span class="fn">2</span><b>“Share Report Card”</b> নির্বাচন করুন</div>
+    <div class="farrow">↓</div>
+    <div class="fbox wa"><span class="fn">3</span><b>WhatsApp</b>-এ Report Link পাঠান</div>
+    <div class="farrow"><span class="albl">WhatsApp না থাকলে</span>↓</div>
+    <div class="fbox sms"><span class="fn">4</span><b>SMS</b>-এ Report Link পাঠান</div>
+  </div>
 </section>
 
 <section>
@@ -156,7 +173,6 @@ footer{margin-top:48px;color:var(--ink3);font-size:.86rem;text-align:center;font
   <h2><span class="n">06</span>সমস্যা হলে কী কী তথ্য লাগবে?</h2>
   <p class="bn">কোনো সমস্যা যাচাই করার জন্য প্রয়োজন অনুযায়ী নিচের তথ্যগুলো সংগ্রহ করুন।</p>
   <ul class="bn"><li>Student-এর নাম ও Class</li><li>Registered Phone Number</li><li>কোন Report বা Screen-এ সমস্যা হচ্ছে</li><li>কী দেখানোর কথা, আর কী দেখাচ্ছে</li><li>সম্ভব হলে Screenshot</li><li>সমস্যাটি কখন থেকে হচ্ছে</li></ul>
-  <div class="note bn"><b>মনে রাখবেন:</b> যাচাই না করে Score, Rank বা কোনো তথ্য ভুল হওয়ার কারণ নিশ্চিত করে বলা যাবে না। সমস্যা সমাধানের নির্দিষ্ট সময়ও নিশ্চিত করা যাবে না।</div>
 </section>
 
 <footer>Shikho Learning Report · Guideline · Internal</footer>
